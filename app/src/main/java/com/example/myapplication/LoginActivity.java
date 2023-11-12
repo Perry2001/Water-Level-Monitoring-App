@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,9 +43,40 @@ public class LoginActivity extends AppCompatActivity {
                 // Check if user is signed in (non-null) and update UI accordingly
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 if (currentUser != null) {
-                    // User is already logged in, redirect to the main activity
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                            .getReference("blockedUser").child(FirebaseAuth.getInstance().getUid());
+
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //If user is blocked, user will return in login activity
+                           if (snapshot.hasChild("isBlock")){
+                               boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
+                               if (isBlock){
+                                   FirebaseAuth.getInstance().signOut();
+                                   finish();
+
+                               }
+                               else {
+                                   // User is already logged in, redirect to the main activity
+                                   startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                   finish();
+                               }
+                           }
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                        }
+                    });
+
+
                 }
             }
         };
@@ -95,11 +131,41 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Login successful
-                            Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                            // Proceed to the main activity or any other desired screen
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                    .getReference("blockedUser").child(FirebaseAuth.getInstance().getUid());
+
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    //If user is blocked, user will return in login activity
+                                    boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
+                                    if (isBlock){
+                                        FirebaseAuth.getInstance().signOut();
+                                        finish();
+                                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                    }
+                                    else {
+
+                                        // Login successful
+
+                                        Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                                        // Proceed to the main activity or any other desired screen
+                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        finish();
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                                }
+                            });
+
                         } else {
                             // Login failed
                             String errorMessage = task.getException().getMessage();
@@ -108,5 +174,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 }

@@ -26,4 +26,12 @@ public class BlockedUserModel {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
+    }
 }

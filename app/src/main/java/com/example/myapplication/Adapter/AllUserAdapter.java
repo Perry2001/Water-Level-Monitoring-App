@@ -47,12 +47,16 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.MyViewHo
     public void onBindViewHolder(@NonNull AllUserAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(list.get(position).getName());
         holder.email.setText(list.get(position).getEmail());
-        holder.nameSelected = list.get(position).getName();
+        holder.nameSelected = list.get(holder.getAdapterPosition()).getName();
 
         holder.blockUserBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
+                final String nameSelected = holder.nameSelected;
+                final String userUID = list.get(position).getUserUID();
+                final String emailSelected = list.get(position).getEmail();
+
                 Dialog blockUserDialog = new Dialog(context);
                 blockUserDialog.setContentView(R.layout.block_user_dialog);
                 blockUserDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -65,36 +69,66 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.MyViewHo
                 yesBtn = blockUserDialog.findViewById(R.id.yes_Button);
                 noBtn = blockUserDialog.findViewById(R.id.no_Button);
 
-                nameOfUserBlock.setText("Are you sure you want \nto block " + holder.nameSelected + " ?");
+
+                nameOfUserBlock.setText("Are you sure you want \nto block " + nameSelected + " ?");
                 yesBtn.setOnClickListener(new View.OnClickListener() {
+
 
                     @Override
                     public void onClick(View v) {
 
-
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(list.get(position).getUserUID());
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
+                                .child(userUID);
 
                         HashMap<String, Object> updateBlockedUser = new HashMap<>();
                         updateBlockedUser.put("isBlock", true);
 
-                        databaseReference.updateChildren(updateBlockedUser)
+                        databaseReference.removeValue()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
 
 
 
-                                        Toast.makeText(context, "User " + holder.nameSelected + " blocked", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "User " + nameSelected + " successfully blocked", Toast.LENGTH_LONG).show();
                                         blockUserDialog.dismiss();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Log.d("TAG", "failed to block user " + holder.nameSelected);
+                                        Log.d("TAG", "failed to block user " + nameSelected);
                                         blockUserDialog.dismiss();
 
                                     }
                                 });
+
+                        DatabaseReference blockedUserDR = FirebaseDatabase.getInstance()
+                                .getReference("blockedUser").child(userUID);
+
+                        HashMap<String, Object> blockedUser = new HashMap<>();
+                        blockedUser.put("name", nameSelected);
+                        blockedUser.put("email", emailSelected);
+                        blockedUser.put("userUID", userUID);
+                        blockedUser.put("isBlock", true);
+
+                        blockedUserDR.updateChildren(blockedUser)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d("TAG", "Updating database success");
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("TAG", "failed to update");
+
+                                    }
+                                });
+
+
+
+
                     }
                 });
 
