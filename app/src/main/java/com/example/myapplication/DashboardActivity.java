@@ -75,7 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-        String imageName = "idea";
+        String imageName = "logo";
         icon = getResources().getIdentifier(imageName, "drawable", getPackageName());
 
         // Set up a listener to monitor changes in the "PumpStatus" value

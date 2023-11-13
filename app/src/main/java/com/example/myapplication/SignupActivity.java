@@ -119,6 +119,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
                             Toast.makeText(SignupActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
+                            FirebaseAuth.getInstance().signOut();
                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
