@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSignupClicked() {
+        // Auto log out if directing in signupActivity
+        FirebaseAuth.getInstance().signOut();
+        Toast.makeText(getApplicationContext(), "User log out", Toast.LENGTH_SHORT).show();
         // Launch SignupActivity
         Intent intent = new Intent(MainActivity.this, SignupActivity.class);
         startActivity(intent);

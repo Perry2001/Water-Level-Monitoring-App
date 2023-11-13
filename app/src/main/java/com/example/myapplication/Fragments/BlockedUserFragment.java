@@ -61,7 +61,7 @@ public class BlockedUserFragment extends Fragment {
 
     private void setUpRecyclerview() {
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("blockedUser");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")

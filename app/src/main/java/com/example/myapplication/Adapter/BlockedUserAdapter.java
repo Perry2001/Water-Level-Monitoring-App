@@ -76,9 +76,9 @@ public class BlockedUserAdapter extends RecyclerView.Adapter<BlockedUserAdapter.
                         HashMap<String, Object> updateUnBlockUser = new HashMap<>();
                         updateUnBlockUser.put("isBlock", false);
 
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("blockedUser").child(userUID);
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userUID);
 
-                        databaseReference.removeValue()
+                        databaseReference.updateChildren(updateUnBlockUser)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -94,33 +94,6 @@ public class BlockedUserAdapter extends RecyclerView.Adapter<BlockedUserAdapter.
 
                                     }
                                 });
-
-                        HashMap<String, Object> unBlockedUser = new HashMap<>();
-                        unBlockedUser.put("name", nameSelected);
-                        unBlockedUser.put("email", emailSelected);
-                        unBlockedUser.put("userUID", userUID);
-                        unBlockedUser.put("isBlock", false);
-
-                        DatabaseReference unBlockUserDF = FirebaseDatabase.getInstance()
-                                .getReference("users").child(userUID);
-
-                        unBlockUserDF.updateChildren(unBlockedUser)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Log.d("TAG", "Updating database success");
-
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d("TAG", "failed to update");
-
-                                    }
-                                });
-
-
-
                     }
                 });
 

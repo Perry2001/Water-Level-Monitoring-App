@@ -83,7 +83,7 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.MyViewHo
                         HashMap<String, Object> updateBlockedUser = new HashMap<>();
                         updateBlockedUser.put("isBlock", true);
 
-                        databaseReference.removeValue()
+                        databaseReference.updateChildren(updateBlockedUser)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -101,33 +101,6 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.MyViewHo
 
                                     }
                                 });
-
-                        DatabaseReference blockedUserDR = FirebaseDatabase.getInstance()
-                                .getReference("blockedUser").child(userUID);
-
-                        HashMap<String, Object> blockedUser = new HashMap<>();
-                        blockedUser.put("name", nameSelected);
-                        blockedUser.put("email", emailSelected);
-                        blockedUser.put("userUID", userUID);
-                        blockedUser.put("isBlock", true);
-
-                        blockedUserDR.updateChildren(blockedUser)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Log.d("TAG", "Updating database success");
-
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d("TAG", "failed to update");
-
-                                    }
-                                });
-
-
-
 
                     }
                 });

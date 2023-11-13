@@ -37,50 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                // Check if user is signed in (non-null) and update UI accordingly
-                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-                if (currentUser != null) {
-
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                            .getReference("blockedUser").child(FirebaseAuth.getInstance().getUid());
-
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            //If user is blocked, user will return in login activity
-                           if (snapshot.hasChild("isBlock")){
-                               boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
-                               if (isBlock){
-                                   FirebaseAuth.getInstance().signOut();
-                                   finish();
-
-                               }
-                               else {
-                                   // User is already logged in, redirect to the main activity
-                                   startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                   finish();
-                               }
-                           }
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-
-
-                        }
-                    });
-
-
-                }
-            }
-        };
-
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
@@ -98,18 +54,48 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Add the AuthStateListener to FirebaseAuth instance
-        mAuth.addAuthStateListener(mAuthListener);
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // Remove the AuthStateListener from FirebaseAuth instance
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("users").child(FirebaseAuth.getInstance().getUid());
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    //If user is blocked, user will return in login activity
+                    if (snapshot.hasChild("isBlock")){
+                        boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
+                        if (isBlock){
+                            Toast.makeText(getApplicationContext(), "User blocked", Toast.LENGTH_SHORT).show();
+                            FirebaseAuth.getInstance().signOut();
+                            finish();
+
+                        }
+                        else {
+                            // User is already logged in, redirect to the main activity
+                            finish();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                }
+            });
+
+
         }
     }
+
+
 
 
     private void loginUser() {
@@ -121,58 +107,61 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+       else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(LoginActivity.this, "Invalid email address.", Toast.LENGTH_SHORT).show();
             return;
         }
+       else {
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
 
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                                    .getReference("blockedUser").child(FirebaseAuth.getInstance().getUid());
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                        .getReference("users").child(FirebaseAuth.getInstance().getUid());
 
-                            databaseReference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    //If user is blocked, user will return in login activity
-                                    boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
-                                    if (isBlock){
-                                        FirebaseAuth.getInstance().signOut();
-                                        finish();
-                                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                databaseReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        //If user is blocked, user will return in login activity
+                                        boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
+                                        if (isBlock){
+                                            FirebaseAuth.getInstance().signOut();
+                                            finish();
+
+                                        }
+                                        else {
+
+                                            // Login successful
+
+                                            Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                                            // Proceed to the main activity or any other desired screen
+                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                            finish();
+                                        }
+
+
                                     }
-                                    else {
 
-                                        // Login successful
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                        Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                                        // Proceed to the main activity or any other desired screen
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                        finish();
+
+
                                     }
+                                });
 
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-
-
-                                }
-                            });
-
-                        } else {
-                            // Login failed
-                            String errorMessage = task.getException().getMessage();
-                            Toast.makeText(LoginActivity.this, "Login failed. " + errorMessage, Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Login failed
+                                String errorMessage = task.getException().getMessage();
+                                Toast.makeText(LoginActivity.this, "Login failed. " + errorMessage, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
+
     }
 
 

@@ -113,6 +113,8 @@ public class SignupActivity extends AppCompatActivity {
                             currentUserRef.child("name").setValue(name);
                             currentUserRef.child("phone").setValue(phone);
                             currentUserRef.child("email").setValue(email);
+                            currentUserRef.child("isBlock").setValue(false);
+                            currentUserRef.child("userUID").setValue(FirebaseAuth.getInstance().getUid());
 
 
 
