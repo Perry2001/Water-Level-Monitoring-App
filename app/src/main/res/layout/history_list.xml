@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/history_list_bg"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginTop="2.5dp"
+    android:layout_marginBottom="2.5dp">
+    
+    <RelativeLayout
+        android:id="@+id/waterPercentage_RelativeLayout"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/water_percentage_bg">
+
+        <TextView
+            android:id="@+id/waterPercentage_Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="100%"
+            android:fontFamily="@font/googlesans_bold"
+            android:textSize="30sp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dateAndTime_Textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jan 8 2024 \n5:45 PM"
+        android:fontFamily="@font/googlesans_bold"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_toEndOf="@id/waterPercentage_RelativeLayout"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_centerVertical="true"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>

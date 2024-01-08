@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +19,15 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.myapplication.Utils.DateAndTimeUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,8 +54,11 @@ public class DashboardActivity extends AppCompatActivity {
     private boolean alarm = true;
     private boolean isSwitchOn = false;
     private int icon;
+    private AppCompatButton historyBtn;
 
 
+    @SuppressLint("MissingInflatedId")
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +67,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent serviceIntent = new Intent(this, MyBackgroundService.class);
         startService(serviceIntent);
+
+
 
         // Initialize the Switch widget
         pump_switch = findViewById(R.id.pump_switch);
@@ -73,6 +84,12 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Initialize the Firebase Realtime Database instance
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        historyBtn = findViewById(R.id.history_Button);
+
+        historyBtn.setOnClickListener(v->{
+            startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
+        });
 
 
         String imageName = "logo";
@@ -107,6 +124,7 @@ public class DashboardActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        int previousWaterLevel = 0;
                         // Retrieve the current value of "WaterLevelPercentage"
                         Integer waterLevelPercentage = dataSnapshot.getValue(Integer.class);
 
@@ -122,6 +140,16 @@ public class DashboardActivity extends AppCompatActivity {
 
                             waterProgressBar.setProgress(progress);
                             percentageTextView.setText(waterLevelPercentage + "%");
+
+                            //Save water percentage
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("waterPercentageHistory").child(DateAndTimeUtils.getDateAndTimeWithSecID());
+                            if (waterLevelPercentage != null &&
+                                    waterLevelPercentage != previousWaterLevel ){
+                                databaseReference.child("waterPercentage").setValue(waterLevelPercentage);
+                                databaseReference.child("date").setValue(DateAndTimeUtils.getCurrentDate());
+                                databaseReference.child("time").setValue(DateAndTimeUtils.getCurrentTime());
+                                previousWaterLevel = waterLevelPercentage;
+                            }
 
 
                             if (waterLevelPercentage >= 98) {
@@ -343,6 +371,16 @@ public class DashboardActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         notificationManager.notify(notificationId, builder.build());
     }
 

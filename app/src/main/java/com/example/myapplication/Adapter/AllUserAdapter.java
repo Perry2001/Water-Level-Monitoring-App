@@ -29,7 +29,6 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.MyViewHo
 
     Context context;
     ArrayList<AllUserModel> list;
-    private int clickedPosition = -1;
 
     public AllUserAdapter(Context context, ArrayList<AllUserModel> list) {
         this.context = context;

@@ -26,20 +26,19 @@
         app:tbOffColor="#e84e40" />
 
 
-
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
         android:elevation="1dp"
+        android:scaleType="fitXY"
         android:src="@drawable/container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.mikhaellopez.circularfillableloaders.CircularFillableLoaders
         android:id="@+id/waterProgressBar"
@@ -78,10 +77,34 @@
         android:layout_height="53dp"
         android:layout_marginBottom="376dp"
         android:text="Set Limit"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        android:padding="15dp"
+        android:fontFamily="@font/googlesans_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/history_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_btn"
+        android:fontFamily="@font/googlesans_bold"
+        android:padding="15dp"
+        android:text="History"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/limiter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundImage"
+        app:layout_constraintVertical_bias="0.952"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
