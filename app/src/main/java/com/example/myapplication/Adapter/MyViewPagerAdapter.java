@@ -18,11 +18,11 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
+            default:
                 return new AllUserFragment();
             case 1:
                 return new BlockedUserFragment();
-            default:
-                return new AllUserFragment();
+
         }
     }
 

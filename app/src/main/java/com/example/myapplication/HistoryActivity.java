@@ -49,13 +49,15 @@ public class HistoryActivity extends AppCompatActivity {
                     for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                         if(dataSnapshot.child("waterPercentage").exists() &&
                                 dataSnapshot.child("date").exists() &&
-                                dataSnapshot.child("time").exists()){
+                                dataSnapshot.child("time").exists() &&
+                                dataSnapshot.child("id").exists()){
                             long waterLevelPercentage = (long) dataSnapshot.child("waterPercentage").getValue();
                             String date = dataSnapshot.child("date").getValue().toString();
                             String time = dataSnapshot.child("time").getValue().toString();
+                            String id = dataSnapshot.child("id").getValue().toString();
 
                             list.add(new HistoryModel(String.valueOf(waterLevelPercentage) + "%",
-                                    date, time));
+                                    date, time, id));
                             if (getApplicationContext() != null)
                                 adapter.notifyDataSetChanged();
 

@@ -142,12 +142,15 @@ public class DashboardActivity extends AppCompatActivity {
                             percentageTextView.setText(waterLevelPercentage + "%");
 
                             //Save water percentage
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("waterPercentageHistory").child(DateAndTimeUtils.getDateAndTimeWithSecID());
+                            String id = DateAndTimeUtils.getDateAndTimeWithSecID();
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("waterPercentageHistory").child(id);
                             if (waterLevelPercentage != null &&
                                     waterLevelPercentage != previousWaterLevel ){
+                                databaseReference.child("id").setValue(id);
                                 databaseReference.child("waterPercentage").setValue(waterLevelPercentage);
                                 databaseReference.child("date").setValue(DateAndTimeUtils.getCurrentDate());
                                 databaseReference.child("time").setValue(DateAndTimeUtils.getCurrentTime());
+
                                 previousWaterLevel = waterLevelPercentage;
                             }
 
