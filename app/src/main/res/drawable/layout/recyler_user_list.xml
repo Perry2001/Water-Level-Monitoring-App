@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardElevation="0dp"
+    app:contentPadding="20dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardCornerRadius="15dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thirdy Gayares"
+                android:fontFamily="@font/montserratmedium"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="III-ACDS"
+                android:textSize="15sp"
+                android:textColor="@color/highlight"
+                android:fontFamily="@font/monserratregular"
+                />
+
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/imgBtnStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/block"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:stateListAnimator="@null"
+            android:background="@drawable/rounded_button"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

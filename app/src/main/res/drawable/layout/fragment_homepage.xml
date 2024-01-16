@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="50dp"
+    tools:context=".Fragment.FragmentHomepage">
+
+    <LinearLayout
+        android:id="@+id/statusLock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/lock"
+            android:layout_gravity="center"
+            app:tint="@color/green"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUnlock"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:drawableTint="@color/primary"
+            android:fontFamily="@font/montserratmedium"
+            android:padding="20dp"
+            android:stateListAnimator="@null"
+            android:text="unlock"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:backgroundTint="@color/green"
+            app:cornerRadius="12dp"
+            app:rippleColor="@color/primary"
+            app:strokeColor="@color/green"
+            app:strokeWidth="1dp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/statusUnLock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/unlock"
+            android:layout_gravity="center"
+            app:tint="@color/red"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLock"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:drawableTint="@color/primary"
+            android:fontFamily="@font/montserratmedium"
+            android:padding="20dp"
+            android:stateListAnimator="@null"
+            android:text="Lock"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:backgroundTint="@color/red"
+            app:cornerRadius="12dp"
+            app:rippleColor="@color/primary"
+            app:strokeColor="@color/red"
+            app:strokeWidth="1dp" />
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>
