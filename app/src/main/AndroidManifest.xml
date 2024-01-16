@@ -24,6 +24,7 @@
             android:name=".DashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_dashboard" />
+<<<<<<< HEAD
 
         <activity
             android:name=".MainActivity"
@@ -39,6 +40,16 @@
             android:exported="false"/>
         <activity
             android:name=".SplashActivity"
+=======
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
             android:exported="true"
             android:noHistory="true">
             <intent-filter>

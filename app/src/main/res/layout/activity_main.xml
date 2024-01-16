@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +13,7 @@
     tools:context=".MainActivity">
 
 
+<<<<<<< HEAD
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,6 +24,28 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+=======
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+
+        <GridLayout
+            android:layout_width="339dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+            android:rowCount="6">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/mejwhite"
@@ -45,7 +72,11 @@
                         android:fontFamily="@font/googlesans_bold"
                         android:text="Monitor"
                         android:textColor="@color/black"
+<<<<<<< HEAD
                         android:textSize="24sp" />
+=======
+                        android:textSize="18sp" />
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
                 </LinearLayout>
 
@@ -53,8 +84,13 @@
 
 
             <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+=======
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/mejwhite"
                 app:cardCornerRadius="12dp"
@@ -80,16 +116,59 @@
                         android:fontFamily="@font/googlesans_bold"
                         android:text="Users"
                         android:textColor="@color/black"
+<<<<<<< HEAD
                         android:textSize="24sp" />
+=======
+                        android:textSize="18sp" />
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+<<<<<<< HEAD
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+=======
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/mejwhite"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="104dp"
+                        android:layout_height="78dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/baseline_person_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/googlesans_bold"
+                        android:text="Create Account"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/mejwhite"
                 app:cardCornerRadius="12dp"
@@ -115,14 +194,27 @@
                         android:fontFamily="@font/googlesans_bold"
                         android:text="Logout"
                         android:textColor="@color/black"
+<<<<<<< HEAD
                         android:textSize="24sp" />
+=======
+                        android:textSize="18sp" />
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+<<<<<<< HEAD
         </LinearLayout>
 
 </LinearLayout>
 
 
+=======
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+>>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
