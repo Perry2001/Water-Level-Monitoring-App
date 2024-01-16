@@ -21,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout dashboard;
     private LinearLayout logout;
     private LinearLayout settings;
-<<<<<<< HEAD
-=======
-    private LinearLayout signup;
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
 
     @Override
@@ -35,10 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         dashboard = findViewById(R.id.dashboard);
         settings = findViewById(R.id.settings);
-<<<<<<< HEAD
-=======
-        signup = findViewById(R.id.signup);
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
         logout = findViewById(R.id.logout);
 
 
@@ -56,16 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
 
-=======
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSignupClicked();
-            }
-        });
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -75,11 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         checkUserBlockStatus();
 
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
     }
 
 
@@ -95,18 +75,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-<<<<<<< HEAD
 
-=======
-    public void onSignupClicked() {
-        // Auto log out if directing in signupActivity
-        FirebaseAuth.getInstance().signOut();
-        Toast.makeText(getApplicationContext(), "User log out", Toast.LENGTH_SHORT).show();
-        // Launch SignupActivity
-        Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-        startActivity(intent);
-    }
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
 
     private void logout() {
@@ -119,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-<<<<<<< HEAD
     private void checkUserBlockStatus() {
         DatabaseReference userReference = FirebaseDatabase.getInstance()
                 .getReference("users").child(FirebaseAuth.getInstance().getUid());
@@ -154,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
 
 

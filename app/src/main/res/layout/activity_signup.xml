@@ -90,7 +90,6 @@
                 android:background="@color/purple_200"
                 app:cornerRadius = "20dp"/>
 
-<<<<<<< HEAD
             <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="match_parent"
@@ -101,8 +100,6 @@
                 android:textAlignment="textEnd"
                 android:textColor="@color/lavender" />
 
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
         </LinearLayout>
 

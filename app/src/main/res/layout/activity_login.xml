@@ -67,7 +67,6 @@
                 android:background="@color/purple_200"
                 android:text="Login" />
 
-<<<<<<< HEAD
             <TextView
                 android:id="@+id/btn_signup"
                 android:layout_width="match_parent"
@@ -79,8 +78,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/lavender" />
 
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
         </LinearLayout>
 

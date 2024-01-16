@@ -26,10 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private Button btnLogin;
-<<<<<<< HEAD
     private TextView btnSignup;
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
 
     private FirebaseAuth mAuth;
@@ -44,10 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
-<<<<<<< HEAD
         btnSignup = findViewById(R.id.btn_signup);
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,11 +64,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-=======
-    }
-
-
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
     @Override
     protected void onStart() {
         super.onStart();
@@ -153,13 +141,8 @@ public class LoginActivity extends AppCompatActivity {
                                         //If user is blocked, user will return in login activity
                                         boolean isBlock = (boolean) snapshot.child("isBlock").getValue();
                                         if (isBlock){
-<<<<<<< HEAD
                                             Intent intent = new Intent(LoginActivity.this, reviewActivity.class);
                                             startActivity(intent);
-=======
-                                            FirebaseAuth.getInstance().signOut();
-                                            finish();
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
                                         }
                                         else {

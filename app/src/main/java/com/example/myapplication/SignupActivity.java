@@ -30,10 +30,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private EditText etName, etPhone, etEmail, etPassword;
     private Button btnSignup;
-<<<<<<< HEAD
     private TextView btnLogin;
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -51,10 +48,7 @@ public class SignupActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         btnSignup = findViewById(R.id.btn_signup);
-<<<<<<< HEAD
         btnLogin = findViewById(R.id.tv_login);
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +57,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +65,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-=======
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
 
     }
 
@@ -132,20 +123,12 @@ public class SignupActivity extends AppCompatActivity {
                             currentUserRef.child("name").setValue(name);
                             currentUserRef.child("phone").setValue(phone);
                             currentUserRef.child("email").setValue(email);
-<<<<<<< HEAD
                             currentUserRef.child("isBlock").setValue(true);
-=======
-                            currentUserRef.child("isBlock").setValue(false);
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
                             currentUserRef.child("userUID").setValue(FirebaseAuth.getInstance().getUid());
 
 
 
-<<<<<<< HEAD
                             Toast.makeText(SignupActivity.this, "Registration successful, wait for confirmation.", Toast.LENGTH_LONG).show();
-=======
-                            Toast.makeText(SignupActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
->>>>>>> 26eb7ed8395d43f39903a0193aa4267bb5089cc4
                             FirebaseAuth.getInstance().signOut();
                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                             startActivity(intent);
